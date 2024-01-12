@@ -1,0 +1,45 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Schedule {
+  id        String   @id @default(cuid()) @map("_id")
+  name      String
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+  courses   Course[]
+
+  @@map("CourseList")
+}
+
+model Course {
+  id           String    @id @default(cuid()) @map("_id")
+  starting     String
+  ending       String
+  days         Day[]
+  courseCode   String
+  courseTitle  String
+  instructor   String
+  group        String
+  room         String
+  CourseList   Schedule? @relation(fields: [courseListId], references: [id])
+  courseListId String?
+}
+
+enum Day {
+  mon
+  tue
+  wed
+  thu
+  fri
+  sat
+  sun
+}

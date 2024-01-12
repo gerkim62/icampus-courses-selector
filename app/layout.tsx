@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-
+import { Toaster } from "react-hot-toast";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -21,9 +21,8 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Navbar />
-        <div className="min-h-[calc(100vh-180px)] md:min-h-[calc(100vh-148px)]">
-          {children}
-        </div>
+        <Toaster />
+        <div className="fullHeight">{children}</div>
 
         <Footer />
       </body>
