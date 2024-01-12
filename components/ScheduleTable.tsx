@@ -29,6 +29,7 @@ const ScheduleTable = ({ courses }: Props) => {
             <th scope="col" className="px-6 py-3">
               Room
             </th>
+            <th>Group</th>
           </tr>
         </thead>
         <tbody>
@@ -48,6 +49,7 @@ const ScheduleTable = ({ courses }: Props) => {
               <td className="px-6 py-4 capitalize">{course.days.join(", ")}</td>
               <td className="px-6 py-4">{`${course.starting} - ${course.ending}`}</td>
               <td className="px-6 py-4">{course.room}</td>
+              <td className="px-6 py-4">{course.group}</td>
             </tr>
           ))}
         </tbody>
