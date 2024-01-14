@@ -14,6 +14,8 @@ const ScheduleTable = ({ courses }: Props) => {
             <th scope="col" className="px-6 py-3">
               Course Code
             </th>
+
+            <th>Group</th>
             <th scope="col" className="px-6 py-3">
               Course Title
             </th>
@@ -29,7 +31,6 @@ const ScheduleTable = ({ courses }: Props) => {
             <th scope="col" className="px-6 py-3">
               Room
             </th>
-            <th>Group</th>
           </tr>
         </thead>
         <tbody>
@@ -41,15 +42,15 @@ const ScheduleTable = ({ courses }: Props) => {
               <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                 {course.courseCode}
               </td>
+              <td className="px-6 py-4">{course.group}</td>
               <td className="px-6 py-4 max-w-[25ch] overflow-hidden whitespace-nowrap overflow-ellipsis">
                 {course.courseTitle}
               </td>
 
               <td className="px-6 py-4">{course.instructor}</td>
-              <td className="px-6 py-4 capitalize">{course.days.join(", ")}</td>
+              <td className="px-6 py-4 capitalize">{course.days.join(", ")|| "Unspecified"}</td>
               <td className="px-6 py-4">{`${course.starting} - ${course.ending}`}</td>
               <td className="px-6 py-4">{course.room}</td>
-              <td className="px-6 py-4">{course.group}</td>
             </tr>
           ))}
         </tbody>
