@@ -4,7 +4,7 @@ const ContactPage: React.FC = () => {
     return (
         <div className="flex flex-col items-center justify-center fullHeight bg-gray-100 text-center">
             <h1 className="text-3xl font-bold mb-4">Contact Me</h1>
-            <p className="text-gray-600 mb-8">I'd love to hear from you!</p>
+            <p className="text-gray-600 mb-8">I&apos;d love to hear from you!</p>
             <div className="">
                 <div className="space-y-4">
                     <div>
