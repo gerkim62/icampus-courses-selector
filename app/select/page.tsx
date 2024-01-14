@@ -37,8 +37,13 @@ async function page() {
       </p>
 
       <p className="text-gray-600 mb-8 text-sm max-w-md mx-auto">
-        Some courses have no date in the timetable that is available to us,
-        hence not listed here.
+        I am using the timetable that was sent via email. If you find an error
+        please let me know (FINAL CLASS TIMETABLE).
+      </p>
+
+      <p className="text-gray-600 mb-8 text-sm max-w-md mx-auto">
+        This app is not affiliated with the university. It is a personal project
+        that I made to help me and my friends. I hope you find it useful.
       </p>
 
       {/* Select component */}

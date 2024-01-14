@@ -3,7 +3,7 @@ import { RiArrowRightSLine } from "react-icons/ri"; // Replace with the appropri
 
 const YourComponent = () => {
   return (
-    <div className="fullHeight flex items-center justify-center bg-emerald-500 text-white">
+    <div className="fullHeight flex items-center justify-center bg-gray-100 text-black">
       <div className="text-center w-md max-w-[90%]">
         <h1 className="text-xl sm:text-4xl font-bold mb-4">
           Welcome to Advanced iCampus Courses Selector
@@ -20,11 +20,11 @@ const YourComponent = () => {
         </Link>
         <Link
           href="/select"
-          className="bg-white text-emerald-500 py-2 px-4 rounded-full block w-40 mx-auto"
+          className="bg-white text-emerald-500 py-2 px-4 rounded-full block w-40 mx-auto border-2 border-emerald-500 hover:bg-emerald-500 hover:text-white font-bold whitespace-nowrap leading-tight"
         >
           <span className="flex justify-center items-center">
             {" "}
-            Get Started <RiArrowRightSLine className="ml-2" />
+            Get Started <RiArrowRightSLine className="ml-2 text-lg" />
           </span>
         </Link>
       </div>

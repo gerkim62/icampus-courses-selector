@@ -1,7 +1,7 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import React, { useState, useTransition } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import React, { useEffect, useState, useTransition } from "react";
 import toast from "react-hot-toast";
 import { FaArrowRight } from "react-icons/fa";
 import Select from "react-select";
@@ -28,11 +28,27 @@ const CoursesSelector = ({ options }: Props) => {
     const encodedCourseCodes = encodeURIComponent(
       selectedCourseCodes.join(",")
     );
+
     router.push(`/view?course_codes=${encodedCourseCodes}`);
   };
   // start of optimization
   const [isPending, startTransition] = useTransition();
-  const [selectedCourseCodes, setSelectedCourseCodes] = useState<string[]>([]);
+  //courses from url
+  const searchParams = useSearchParams();
+  const courseCodesFromUrl = searchParams.get("course_codes") || "";
+  const courseCodesFromUrlArray = courseCodesFromUrl.split(",").filter(Boolean);
+  console.log(courseCodesFromUrlArray);
+  const [selectedCourseCodes, setSelectedCourseCodes] = useState<string[]>(
+    courseCodesFromUrlArray
+  );
+
+  //each time selected course codes change, update the url
+  useEffect(() => {
+    const encodedCourseCodes = encodeURIComponent(
+      selectedCourseCodes.join(",")
+    );
+    router.replace(`/select?course_codes=${encodedCourseCodes}`);
+  }, [selectedCourseCodes]);
   return (
     <div className="max-w-md mx-auto">
       <Select
@@ -50,6 +66,9 @@ const CoursesSelector = ({ options }: Props) => {
         name="courses"
         className=" flex-grow"
         classNamePrefix="select"
+        value={options.filter((option) =>
+          selectedCourseCodes.includes(option.value)
+        )}
         onChange={(selectedOptions) => {
           setSelectedCourseCodes(selectedOptions.map((option) => option.value));
         }}
