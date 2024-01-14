@@ -11,6 +11,8 @@ const YourComponent = () => {
         <p className="text-lg mb-6">
           This app is a helpful experimental app that helps you choose courses
           that do not have conflicts with each other for the new iCampus system.
+         <p className="text-sm m-5">The app is using the pdf timetable that was sent via email.</p>
+          
         </p>
         <Link
           href="/motivation" // Replace with the actual link to the motivation page

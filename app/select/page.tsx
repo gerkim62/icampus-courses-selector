@@ -30,7 +30,10 @@ async function page() {
         Choose Your Courses
       </h1>
 
-      <p className="text-gray-600 mb-8 text-sm max-w-md mx-auto">
+      {/* Select component */}
+      <Select options={options} />
+
+      <p className="text-gray-600 mb-8 text-sm max-w-md mx-auto mt-4">
         Select your courses for the semester and click &#34;Next.&#34; The
         software will create an optimal schedule for you, avoiding any time
         conflicts.
@@ -38,16 +41,13 @@ async function page() {
 
       <p className="text-gray-600 mb-8 text-sm max-w-md mx-auto">
         I am using the timetable that was sent via email. If you find an error
-        please let me know (FINAL CLASS TIMETABLE).
+        please let me know. I will try to fix it as soon as possible.
       </p>
 
       <p className="text-gray-600 mb-8 text-sm max-w-md mx-auto">
         This app is not affiliated with the university. It is a personal project
         that I made to help me and my friends. I hope you find it useful.
       </p>
-
-      {/* Select component */}
-      <Select options={options} />
     </div>
   );
 }
