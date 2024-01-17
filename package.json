@@ -12,6 +12,8 @@
   "dependencies": {
     "@prisma/client": "^5.8.0",
     "html-table-to-json": "^1.0.0",
+    "jspdf": "^2.5.1",
+    "jspdf-autotable": "^3.8.1",
     "next": "14.0.4",
     "react": "^18",
     "react-dom": "^18",

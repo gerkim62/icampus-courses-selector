@@ -56,7 +56,7 @@ const CoursesSelector = ({ options }: Props) => {
         onInputChange={() => startTransition(() => {})}
         isLoading={isPending}
         // end of optimization
-
+        isClearable={false}
         placeholder={`Search...`}
         noOptionsMessage={() => "Course not found."}
         loadingMessage={() => "Searching..."}
@@ -84,7 +84,7 @@ const CoursesSelector = ({ options }: Props) => {
           {isPending ? (
             <>
               <span className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></span>{" "}
-              Saving... 
+              Saving...
               <span className="sr-only">Processing Selection...</span>
             </>
           ) : (
