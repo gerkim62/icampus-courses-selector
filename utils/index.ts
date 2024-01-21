@@ -2,7 +2,7 @@ import { Course } from "@prisma/client";
 
 function findAllScheduleCombinations(
   courses: Course[],
-  { minCoursesCount = 2 }: { minCoursesCount?: number } = {}
+  { minCoursesCount = 0 }: { minCoursesCount?: number } = {}
 ) {
   function hasTimeConflict(courseA: Course, courseB: Course): boolean {
     if (!courseA || !courseB) {
@@ -71,38 +71,62 @@ function findAllScheduleCombinations(
   // Sort schedules in descending order based on the number of courses
   allScheduleCombinations.sort((a, b) => b.length - a.length);
 
+  // return allScheduleCombinations;
+
   const withoutSubsets: Course[][] = removeSubsets(allScheduleCombinations);
 
   return sortCombinationsByCreditHours(withoutSubsets);
 }
 
-function removeSubsets(scheduleCombinations: Course[][]): Course[][] {
-  const nonSubsets: Course[][] = [];
+type Combination = Course[];
 
-  for (const combination of scheduleCombinations) {
-    let isSubset: boolean = false;
+function checkIsSubset(
+  currentCombination: Combination,
+  existingCombination: Combination
+): boolean {
+  const subsetCourses: Course[] = [];
 
-    for (const existingCombination of nonSubsets) {
-      if (
-        combination.every((courseA) =>
-          existingCombination.some(
-            (courseB) =>
-              courseA.courseCode === courseB.courseCode &&
-              courseA.group === courseB.group
-          )
-        )
-      ) {
-        isSubset = true;
-        break;
-      }
+  const isSubset = currentCombination.every((currentCourse) => {
+    const matchingCourse = existingCombination.find(
+      (existingCourse) =>
+        (currentCourse.courseCode === existingCourse.courseCode &&
+        currentCourse.group === existingCourse.group)
+    );
+
+    if (!matchingCourse) {
+      return false;
     }
 
-    if (!isSubset) {
-      nonSubsets.push(combination);
-    }
+    subsetCourses.push(matchingCourse);
+    return true;
+  });
+
+  if (isSubset) {
+    console.log("Subset Detected:");
+    console.log("Current Combination:", currentCombination);
+    console.log("Courses causing subset:", subsetCourses);
+    console.log("Existing Combination (Superset):", existingCombination);
   }
 
-  return nonSubsets;
+  return isSubset;
+}
+
+function removeSubsets(combinations: Combination[]): Combination[] {
+  const uniqueCombinations: Combination[] = [];
+
+  combinations.forEach((currentCombination) => {
+    // Check if the current combination is a subset of any existing combination
+    const isSubset = uniqueCombinations.some((existingCombination) =>
+      checkIsSubset(currentCombination, existingCombination)
+    );
+
+    // If not a subset, add it to the unique combinations array
+    if (!isSubset) {
+      uniqueCombinations.push(currentCombination);
+    }
+  });
+
+  return uniqueCombinations;
 }
 
 // Add type definition for sortCombinationsByCreditHours if not defined
