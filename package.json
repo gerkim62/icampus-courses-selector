@@ -14,7 +14,7 @@
     "html-table-to-json": "^1.0.0",
     "jspdf": "^2.5.1",
     "jspdf-autotable": "^3.8.1",
-    "next": "14.0.4",
+    "next": "14.1.1",
     "npm": "^10.3.0",
     "react": "^18",
     "react-dom": "^18",
