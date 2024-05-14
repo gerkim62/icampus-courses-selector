@@ -108,6 +108,15 @@ async function uploadCoursesHtml(formdata: FormData) {
     try {
       console.log("saving courses");
 
+      // remove all courses
+      await prisma.course.deleteMany();
+      console.log("deleted courses")
+      // remove all schedules
+      await prisma.schedule.deleteMany();
+      console.log("deleted schedules")
+
+      console.log("creating schedule new...")
+
       // Create schedule
       const schedule = await prisma.schedule.create({
         data: {
