@@ -4,7 +4,12 @@ import { FaArrowRight } from "react-icons/fa";
 import { unstable_noStore } from "next/cache";
 async function page() {
   unstable_noStore();
-  const courses = await prisma.course.findMany();
+  const { courses, createdAt, updatedAt } =
+    await prisma.schedule.findFirstOrThrow({
+      include: {
+        courses: true,
+      },
+    });
   //uniqu courses based on courseCode
 
   const uniqueCourses = courses.filter(
@@ -26,9 +31,13 @@ async function page() {
 
   return (
     <div className="max-w-screen-xl mx-auto p-8">
-      <h1 className="text-2xl sm:text-3xl font-bold mb-6 max-w-md mx-auto">
+      <h1 className="text-2xl sm:text-3xl font-bold mb-2 max-w-md mx-auto">
         Choose Your Courses
       </h1>
+
+      <p className="text-lg font-bold text-orange-600 mb-6 max-w-md mx-auto">
+        Last updated: {createdAt.toLocaleDateString()}
+      </p>
 
       {/* Select component */}
       <Select options={options} />
